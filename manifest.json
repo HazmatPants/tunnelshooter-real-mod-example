@@ -1,0 +1,8 @@
+{
+    "id": "test-mod",
+    "name": "Test Mod",
+    "author": "HazmatPants",
+    "description": "A test/example mod",
+    "priority": 0,
+    "main": "scripts/main.gd",
+}
