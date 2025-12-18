@@ -1,21 +1,3 @@
-extends BaseMod
-
-var sound
-
-func on_load():
-    # This runs when the mod is loaded
-    sound = load_ogg(mod_path, "assets/sounds/test.ogg")
-    print("Test Mod loaded!")
-    GLOBAL.playsound(sound)
-
-func on_ready():
-    # This runs when the mod is added to the scene tree (`func _ready()`)
-    print("Test Mod ready!")
-
-func on_unload():
-    # This will run when the mod is unloaded (currently not implemented)
-    print("Test Mod unloaded!")
-
 # You can run ANY GDScript code.
 
 # The game has a few auto-loads for easier interaction
@@ -50,7 +32,9 @@ func on_unload():
 #       description: a description for the gun, shows in the inspect screen
 #       manufacturer: the gun's manufacturer, just shows in the inspect screen
 
-# BaseMod also contains some helper functions and variables
+# BaseMod contains some helper functions and variables
+# you are not required to use it
+
 #   Functions:
 #       load_wav(base_path: String, file_path: String) -> AudioStreamWAV
 #           loads a WAV audio file and returns it
@@ -74,7 +58,21 @@ func on_unload():
 #       var main: String
 #           the path to the mod's main script file
 
-# This function plays a sound when you press the H key
+extends BaseMod # extend the BaseMod class
+
+var sound: AudioStream # null AudioStream variable
+
+func on_load(): # This runs when the mod is loaded
+    sound = load_ogg(mod_path, "assets/sounds/test.ogg") # load a sound
+    print("Test Mod loaded!")
+
+func on_ready(): # This runs when the mod is added to the scene tree (`func _ready()`)
+    print("Test Mod ready!")
+
+func on_unload(): # This will run when the mod is unloaded (currently not implemented)
+    print("Test Mod unloaded!")
+
+# This function plays the sound when you press the H key
 func _unhandled_input(event: InputEvent) -> void:
     if event is InputEventKey:
         if event.keycode == KEY_H and event.pressed:
