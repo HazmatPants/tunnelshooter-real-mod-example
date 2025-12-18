@@ -2,7 +2,8 @@
 
 # The game has a few auto-loads for easier interaction
 # `GLOBAL`:
-#    GLOBAL.playsound(stream, volume_linear, pitch_scale, bus)
+##   GLOBAL.playsound(stream, volume_linear, pitch_scale, bus)
+#       plays a non-3D sound, good for UI sounds
 #      stream: the AudioStream to play
 #      volume_linear: the sound's linear volume
 #          0.0 is silent, 1.0 is normal volume.
@@ -10,13 +11,13 @@
 #      pitch_scale: the sound's pitch multiplier.
 #          defaults to 1.0
 #      bus: the bus to play the sound on. defaults to the "SFX" bus
-#    GLOBAL.playsound3d(stream, global_position, volume_linear, pitch_scale, bus)
+##   GLOBAL.playsound3d(stream, global_position, volume_linear, pitch_scale, bus)
 #      same as GLOBAL.playsound, but in 3D.
 #      specify `global_position` for where to play the sound in 3D space
 #    GLOBAL.randsfx(sound_list)
 #      returns a random AudioStream from an Array of AudioStreams
 # `GunManager`:
-#    register_gun(
+##   register_gun(
 #     gun_id: String,
 #     gun_name: String,
 #     caliber_id: String,
@@ -36,11 +37,11 @@
 # you are not required to use it
 
 #   Functions:
-#       load_wav(base_path: String, file_path: String) -> AudioStreamWAV
+##      load_wav(base_path: String, file_path: String) -> AudioStreamWAV
 #           loads a WAV audio file and returns it
-#       load_ogg(base_path: String, file_path: String) -> AudioStreamOggVorbis:
+##      load_ogg(base_path: String, file_path: String) -> AudioStreamOggVorbis:
 #           loads an OGG Vorbis audio file and returns it
-#       load_image(base_path: String, file_path: String) -> Image:
+##      load_image(base_path: String, file_path: String) -> Image:
 #           loads an Image and returns it
 #   Variables:
 #       var mod_path: String
