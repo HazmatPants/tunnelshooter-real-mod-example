@@ -41,6 +41,8 @@
 #           loads a WAV audio file and returns it
 ##      load_ogg(base_path: String, file_path: String) -> AudioStreamOggVorbis:
 #           loads an OGG Vorbis audio file and returns it
+##      load_mp3(base_path: String, file_path: String) -> AudioStreamOggVorbis:
+#           loads an MP3 audio file and returns it
 ##      load_image(base_path: String, file_path: String) -> Image:
 #           loads an Image and returns it
 #   Variables:
@@ -62,10 +64,14 @@
 extends BaseMod # extend the BaseMod class
 
 var sound: AudioStream # null AudioStream variable
+var helper: Node # null Node variable
 
 func on_load(): # This runs when the mod is loaded
     sound = load_ogg(mod_path, "assets/sounds/test.ogg") # load a sound
+    helper = load_script(mod_path, "scripts/helper.gd")
+    # loads the script and adds it to a Node as a child of this mod's Node
     print("Test Mod loaded!")
+    helper.helper()
 
 func on_ready(): # This runs when the mod is added to the scene tree (`func _ready()`)
     print("Test Mod ready!")
