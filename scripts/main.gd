@@ -64,17 +64,34 @@
 extends BaseMod # extend the BaseMod class
 
 var sound: AudioStream # null AudioStream variable
-var helper: Node # null Node variable
+var helper: Node
+var texture_rect: TextureRect
+
+var texture_rect_target_pos := Vector2.ZERO
+
+func on_ready():
+    GLOBAL.initialized.connect(start)
 
 func on_load(): # This runs when the mod is loaded
     sound = load_ogg(mod_path, "assets/sounds/test.ogg") # load a sound
     helper = load_script(mod_path, "scripts/helper.gd")
     # loads the script and adds it to a Node as a child of this mod's Node
-    print("Test Mod loaded!")
     helper.helper()
 
-func on_ready(): # This runs when the mod is added to the scene tree (`func _ready()`)
-    print("Test Mod ready!")
+func start():
+    print("Test Mod loaded!")
+
+    # add a custom HUD element
+    var texture = ImageTexture.new()
+    texture.image = load_image(mod_path, "assets/textures/image.png")
+    texture_rect = null
+    texture_rect = TextureRect.new()
+    texture_rect.texture = texture
+    GLOBAL.player.hud.add_child(texture_rect)
+    texture_rect.pivot_offset = texture_rect.size / 2
+
+    GLOBAL.show_notif("Test Mod started!")
+
 
 func on_unload(): # This will run when the mod is unloaded (currently not implemented)
     print("Test Mod unloaded!")
@@ -84,3 +101,17 @@ func _unhandled_input(event: InputEvent) -> void:
     if event is InputEventKey:
         if event.keycode == KEY_H and event.pressed:
             GLOBAL.playsound(sound)
+            GLOBAL.show_notif("Played sound", 0.0)
+
+var timer: float = 0.0
+func _process(delta: float) -> void:
+    if texture_rect == null: return
+    texture_rect.rotation += 10 * delta
+    timer += delta
+    if timer > 1.0:
+        timer = randf()
+        texture_rect_target_pos = Vector2(
+            randf_range(0, 1000),
+            randf_range(0, 700),
+            )
+    texture_rect.position = texture_rect.position.lerp(texture_rect_target_pos, 0.1)

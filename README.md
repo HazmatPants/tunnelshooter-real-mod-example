@@ -85,7 +85,7 @@ func on_load():
     helper.helper()
 ```
 
-```gdscript
+```
 # scripts/helper.gd
 extends Node
 
